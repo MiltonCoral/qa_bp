@@ -1,0 +1,82 @@
+# Hallazgos y conclusiones — Prueba E2E en demoblaze.com
+
+## 1. De qué se trató esto
+
+Armé una prueba automatizada End-to-End del flujo de compra completo en demoblaze.com, usando Selenium WebDriver con Python. La idea era simular lo que haría cualquier usuario real: agregar productos al carrito, revisar el carrito, llenar el formulario de compra y completar la transacción.
+
+## 2. Problemas Encontrados
+
+### 2.1 Hay que pasar por el home sí o sí
+
+Algo que no era obvio al principio: demoblaze carga el catálogo de productos en memoria cuando entras al home (`index.html`). Si intentas entrar directo a la URL de un producto (`prod.html?idp_=X`) sin pasar antes por el home, el estado del catálogo queda desincronizado y terminas agregando al carrito un producto distinto al que querías.
+
+La solución fue simple una vez que entendí el problema: siempre navegar primero a `index.html` antes de tocar la página de un producto, para que el catálogo se cargue bien en memoria.
+
+### 2.2 El carrito tarda en mostrarse completo
+
+La página del carrito (`cart.html`) hace varias peticiones AJAX por debajo para traer imágenes, títulos y precios de cada producto, y para calcular el total. Cuando hay más de un producto, esto tarda un poco más de lo que uno esperaría, y si tratas de leer los datos antes de que termine de cargar, te quedas con información incompleta o directamente incorrecta.
+
+Para esto usé esperas explícitas como base, pero también tuve que meter algunos `time.sleep` estratégicos antes de leer el carrito y el total, para darle tiempo al sitio de terminar sus peticiones.
+
+### 2.3 Las alertas nativas del navegador pueden congelar todo
+
+Cada vez que agregas un producto, el sitio dispara una alerta nativa del navegador ("Product added") para confirmarlo. Si no la manejas, esa alerta bloquea toda la interacción y el test simplemente se queda colgado esperando.
+
+Lo resolví manejándola explícitamente con `driver.switch_to.alert`, capturando el texto y aceptándola con `accept()`.
+
+### 2.4 El modal de confirmación no es una alerta normal
+
+Al final de la compra aparece un modal de éxito, pero no es un alert nativo: está hecho con SweetAlert (swal). Los selectores típicos de Selenium no lo agarran bien si no esperas a que esté realmente visible.
+
+Tuve que usar esperas explícitas hasta que el modal (`orderModal`) fuera visible, y de ahí extraer el mensaje de confirmación del elemento `<p class="lead text-muted">`.
+
+### 2.5 Las cookies entre corridas pueden ensuciar los resultados
+
+El sitio guarda el estado del carrito en una cookie (`tokenp_`). Si corres el test varias veces seguidas sin limpiar nada, te puede quedar basura de ejecuciones anteriores mezclada con la actual, lo cual arruina la validez de los resultados.
+
+Para evitar esto, cada ejecución crea un perfil temporal de Chrome único (con `tempfile` + `uuid`) en modo incógnito, y al cerrar el driver limpio cookies, localStorage, sessionStorage y caché vía CDP.
+
+## 3. Cómo quedó armada la solución
+
+### 3.1 Todo dividido por funciones
+
+Organicé el código en funciones bien separadas, una por cada paso del flujo:
+
+- `crear_driver()` — arma y configura el driver
+- `agregar_dos_productos()` — paso 1, agregar al carrito
+- `visualizar_carrito()` — paso 2, verificar que el carrito esté bien
+- `completar_formulario_compra()` — paso 3, cerrar la compra
+- `cerrar_driver()` — limpieza y cierre del navegador
+
+### 3.2 Esperas explícitas por delante, sleeps solo cuando hacía falta
+
+Preferí usar `WebDriverWait` + `expected_conditions` como estrategia principal porque es más robusto, y solo metí `time.sleep` puntuales donde el renderizado asíncrono realmente lo necesitaba.
+
+### 3.3 Selectores
+
+Usé selectores CSS y XPath sacados directo del código fuente del sitio, buscando que fueran lo más estables posible ante cambios menores:
+
+- CSS: `a.btn-success.btn-lg`, `#tbodyid`, `#totalp`, `button.confirm.btn...`
+- XPath: `//button[contains(text(), 'Place Order')]`
+
+## 4. Resultado final
+
+- ✅ Paso 1: productos agregados bien al carrito
+- ✅ Paso 2: carrito mostrando productos y total correctos
+- ✅ Paso 3: formulario completado y compra cerrada con éxito
+- ✅ Mensaje de confirmación capturado y verificado
+
+Todo verde.
+
+## 5. Conclusiones
+
+1. El flujo E2E de demoblaze sí se puede automatizar completo con Selenium, pero hay que tener paciencia con el comportamiento asíncrono del frontend (AJAX, alertas, modales). No es un sitio "directo".
+2. Pasar primero por el home no es opcional, es la única forma de que el catálogo cargue bien.
+3. Los delays en el carrito no son un parche feo, son necesarios: el total y las imágenes necesitan ese tiempo extra para terminar de calcularse/cargar.
+4. Aislar cada ejecución con perfiles temporales e incógnito es lo que me dio resultados reproducibles, sin contaminación entre pruebas.
+5. La combinación de esperas explícitas con algunos sleeps controlados terminó siendo el balance más práctico entre robustez y velocidad de ejecución.
+
+---
+*Fecha de ejecución: 2026-06-19*
+*Framework: Selenium WebDriver 4.x + Python 3*
+*Sitio bajo prueba: https://www.demoblaze.com*
