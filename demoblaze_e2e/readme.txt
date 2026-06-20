@@ -104,6 +104,9 @@ El flujo automatizado incluye:
             return driver
 
     NOTA: Ajuste las rutas absolutas según la ubicación real en su sistema.
+    NOTA: Para Mac OS ejecutar los siguientes comandos en los repectivos directorios de carpetas
+      xattr -cr 'Google Chrome for Testing.app'
+      chmod +x "DIRECTORIO/chromedriver-mac-arm64/chromedriver"
 
 
 4. INSTALACIÓN DE DEPENDENCIAS PYTHON
@@ -121,6 +124,10 @@ El flujo automatizado incluye:
 4.2 Instale las bibliotecas requeridas:
 
         pip install selenium
+        
+        o
+
+        pip3 install selenium
 
 5. ESTRUCTURA DEL PROYECTO
 --------------------------------------------------------------------------------
