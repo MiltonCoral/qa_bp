@@ -1,0 +1,13 @@
+{
+  "baseUrl": "https://api.demoblaze.com",
+  "endpoints": {
+    "signup": "/signup",
+    "login": "/login"
+  },
+  "expectedResponses": {
+    "signupSuccess": "",
+    "signupExisting": "This user already exist.",
+    "loginWrongPassword": "Wrong password.",
+    "loginUserNotFound": "User does not exist."
+  }
+}
