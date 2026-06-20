@@ -75,6 +75,8 @@ Usé selectores CSS y XPath sacados directo del código fuente del sitio, buscan
 4. Aislar cada ejecución con perfiles temporales e incógnito es lo que me dio resultados reproducibles, sin contaminación entre pruebas.
 5. La combinación de esperas explícitas con algunos sleeps controlados terminó siendo el balance más práctico entre robustez y velocidad de ejecución.
 
+NOTA: He incluido un video demo.mp4 con la prueba funcional
+
 ---
 *Fecha de ejecución: 2026-06-19*
 *Framework: Selenium WebDriver 4.x + Python 3*
