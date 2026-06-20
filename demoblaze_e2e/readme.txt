@@ -104,7 +104,7 @@ El flujo automatizado incluye:
             return driver
 
     NOTA: Ajuste las rutas absolutas según la ubicación real en su sistema.
-    NOTA: Para Mac OS ejecutar los siguientes comandos en los repectivos directorios de carpetas
+    NOTA: Para Mac OS (Apple Silicon) ejecutar los siguientes comandos en los repectivos directorios de carpetas (navegador y driver)
       xattr -cr 'Google Chrome for Testing.app'
       chmod +x "DIRECTORIO/chromedriver-mac-arm64/chromedriver"
 
@@ -163,7 +163,7 @@ El flujo automatizado incluye:
 El script permite ajustar los siguientes parámetros en la sección __main__:
 
     product_ids=[2, 6]     # IDs de los productos a agregar (cambiar según necesidad)
-    tiempo=2                 # Delay en segundos para esperar cálculos y renderizado
+    tiempo=2               # Delay en segundos para esperar cálculos y renderizado
 
 Los productos disponibles en demoblaze.com tienen IDs consecutivos (1, 2, 3...).
 Puede modificarlos según los productos que desee probar.

@@ -30,7 +30,7 @@ Al final de la compra aparece un modal de éxito, pero no es un alert nativo: es
 
 Tuve que usar esperas explícitas hasta que el modal (`orderModal`) fuera visible, y de ahí extraer el mensaje de confirmación del elemento `<p class="lead text-muted">`.
 
-### 2.5 Las cookies entre corridas pueden ensuciar los resultados
+### 2.5 Las cookies entre ejecuciones pueden ensuciar los resultados
 
 El sitio guarda el estado del carrito en una cookie (`tokenp_`). Si corres el test varias veces seguidas sin limpiar nada, te puede quedar basura de ejecuciones anteriores mezclada con la actual, lo cual arruina la validez de los resultados.
 
@@ -66,7 +66,6 @@ Usé selectores CSS y XPath sacados directo del código fuente del sitio, buscan
 - ✅ Paso 3: formulario completado y compra cerrada con éxito
 - ✅ Mensaje de confirmación capturado y verificado
 
-Todo verde.
 
 ## 5. Conclusiones
 
