@@ -22,7 +22,7 @@ def crear_driver():
     chrome_options.add_argument("--disable-dev-shm-usage")
 
     # --- Chrome for Testing: ubicación manual ---
-    chrome_options.binary_location = "/Users/edi/Documents/Trabajo/qa_bp/demoblaze_e2e/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"  # o chrome.exe en Windows
+    chrome_options.binary_location = "C:/Users/milton/Desktop/test/qa_bp/demoblaze_e2e/chrome-win64/chrome.exe"  # o chrome.exe en Windows
 
     # Perfil temporal único -> sin cookies/caché de ejecuciones anteriores
     user_data_dir = tempfile.mkdtemp(prefix=f"chrome-profile-{uuid.uuid4()}-")
@@ -30,7 +30,7 @@ def crear_driver():
     chrome_options.add_argument("--incognito")  # opcional, refuerza el aislamiento
 
     # --- Chromedriver: debe ser la versión que viene con ese Chrome for Testing ---
-    service = Service(executable_path="/Users/edi/Documents/Trabajo/qa_bp/demoblaze_e2e/chromedriver-mac-arm64/chromedriver") # o chromedriver.exe en Windows
+    service = Service(executable_path="C:/Users/milton\Desktop/test/qa_bp/demoblaze_e2e/chromedriver-win64/chromedriver.exe") # o chromedriver.exe en Windows
 
     driver = webdriver.Chrome(service=service, options=chrome_options)
     driver.maximize_window()

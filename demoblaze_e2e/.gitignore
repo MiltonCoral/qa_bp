@@ -3,6 +3,8 @@ chrome-linux64/
 chromedriver-linux64/
 chrome-mac-arm64/
 chromedriver-mac-arm64/
+chrome-win64/
+chromedriver-win64/
 
 # Sistema operativo
 .DS_Store

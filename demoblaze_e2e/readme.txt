@@ -88,7 +88,7 @@ El flujo automatizado incluye:
 
             # --- Ruta al Chrome for Testing ---
             chrome_options.binary_location = "/home/usuario/proyecto/demoblaze_e2e/chrome-linux64/chrome"
-            # Windows: "C:\Users\Usuario\demoblaze_e2e\chrome-win64\chrome.exe"
+            # Windows Ejemplo: "C:/Users/milton/Desktop/test/qa_bp/demoblaze_e2e/chrome-win64/chrome.exe"
 
             # Perfil temporal único
             user_data_dir = tempfile.mkdtemp(prefix=f"chrome-profile-{uuid.uuid4()}-")
@@ -97,7 +97,7 @@ El flujo automatizado incluye:
 
             # --- Ruta al ChromeDriver emparejado ---
             service = Service(executable_path="/home/usuario/proyecto/demoblaze_e2e/chromedriver-linux64/chromedriver")
-            # Windows: "C:\Users\Usuario\demoblaze_e2e\chromedriver-win64\chromedriver.exe"
+            #Windows Ejemplo: "C:/Users/milton\Desktop/test/qa_bp/demoblaze_e2e/chromedriver-win64/chromedriver.exe"
 
             driver = webdriver.Chrome(service=service, options=chrome_options)
             driver.maximize_window()
@@ -111,17 +111,7 @@ El flujo automatizado incluye:
 
 4. INSTALACIÓN DE DEPENDENCIAS PYTHON
 --------------------------------------------------------------------------------
-4.1 Cree y active un entorno virtual (recomendado):
-
-    Linux / Mac:
-        python3 -m venv venv
-        source venv/bin/activate
-
-    Windows:
-        python -m venv venv
-        venv\Scripts\activate
-
-4.2 Instale las bibliotecas requeridas:
+4.1 Instale las bibliotecas requeridas:
 
         pip install selenium
         
@@ -132,8 +122,8 @@ El flujo automatizado incluye:
 5. ESTRUCTURA DEL PROYECTO
 --------------------------------------------------------------------------------
     demoblaze_e2e/
-    ├── chrome-linux64/        # Chrome for Testing (Método 1)
-    ├── chromedriver-linux64/  # ChromeDriver emparejado (Método 1)
+    ├── chrome-linux64/        # Chrome for Testing 
+    ├── chromedriver-linux64/  # ChromeDriver emparejado 
     ├── test_demoblaze.py      # Script principal con el flujo E2E completo
     ├── readme.txt             # Este archivo
     └── conclusiones.txt       # Hallazgos y conclusiones del ejercicio
@@ -206,6 +196,10 @@ Puede modificarlos según los productos que desee probar.
             (index.html) antes de acceder a las URLs de productos individuales.
             Esto es crítico porque el frontend inicializa el catálogo en memoria
             durante la carga del home.
+
+Notas Importantes : La ejecucion fue probada tanto en Mac OS Apple Silicon , Linux Fedora 42 y Windows 10 x64
+No olvidar añadir al PATH de windows python para que sea posible ejecutar de consola python3 o python
+, de igual forma con el resto de OS, Se adjunta una demo en formato .mp4 para verificar el funcionamiento
 
 ================================================================================
 Autor: Milton Coral
