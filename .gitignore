@@ -1,0 +1,8 @@
+# Controladores y binarios de Chrome
+chrome-linux64/
+chromedriver-linux64/
+chrome-mac-arm64/
+chromedriver-mac-arm64/
+
+# Archivos del sistema macOS
+.DS_Store
