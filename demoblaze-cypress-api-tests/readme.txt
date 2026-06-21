@@ -105,7 +105,7 @@ demoblaze-cypress-api-tests/
 │   │   ├── commands.js           ← Comandos personalizados
 │   │   └── e2e.js                ← Configuración de soporte
 │   ├── screenshots/              ← Capturas (auto)
-│   └── videos/                   ← Videos (auto)
+│   └── videos/                   ← Videos (auto) Carpeta que contiene el demo de las pruebas en formato .mp4 
 │
 ├── reports/                      ← Reportes generados (auto)
 ├── readme.txt                    ← Este archivo
