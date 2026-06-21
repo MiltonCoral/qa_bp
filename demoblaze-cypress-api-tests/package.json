@@ -9,10 +9,15 @@
     "cy:run:headless": "cypress run --headless",
     "test": "cypress run"
   },
-  "keywords": ["cypress", "api-testing", "demoblaze", "rest-api"],
+  "keywords": [
+    "cypress",
+    "api-testing",
+    "demoblaze",
+    "rest-api"
+  ],
   "author": "Tester",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^13.0.0"
+    "cypress": "^15.17.0"
   }
 }

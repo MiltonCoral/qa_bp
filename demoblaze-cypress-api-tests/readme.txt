@@ -51,6 +51,19 @@ Ejecutar:
 
 Este comando instalará Cypress (versión 13.x) y todas las dependencias.
 
+Nota: Si estamos en windows ejecutar la consola desde administrador o habilitar
+los permisos para instalar los paquetes npm con el sig comando en powershell
+
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+En Mac OS se puede utilizar
+directamente sudo npm install para evitar esto. 
+
+Si se presenta algun problema ejecutar 
+
+npm install 
+npm audit fix --force
+
 ================================================================================
 EJECUCIÓN DE LAS PRUEBAS
 ================================================================================
@@ -61,7 +74,7 @@ OPCIÓN A: Modo Interactivo (Cypress Test Runner)
 
 Luego:
   1. Seleccionar "E2E Testing"
-  2. Elegir el navegador (Chrome recomendado)
+  2. Elegir el navegador
   3. Hacer clic en "demoblaze-api.cy.js"
   4. Ver los tests ejecutarse con logs detallados
 
@@ -181,3 +194,5 @@ Solución: Verificar conexión a internet. La API debe estar accesible.
 Problema: "Tests fallan intermitentemente"
 Solución: La API de demoblaze puede tener latencia. Aumentar el timeout en
 cypress.config.js si es necesario.
+
+Notas Importantes : La ejecucion fue probada tanto en Mac OS Apple Silicon , Linux Fedora 42 y Windows 10 x64
