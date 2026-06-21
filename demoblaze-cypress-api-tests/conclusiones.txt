@@ -3,10 +3,6 @@
               Pruebas de API REST - Demoblaze.com
 ================================================================================
 
-FECHA: Junio 2026
-PROYECTO: Automatización de pruebas de API con Cypress.io
-ENDPOINTS: /signup y /login
-
 ================================================================================
 1. RESUMEN EJECUTIVO
 ================================================================================
@@ -35,8 +31,6 @@ logrando una cobertura completa de los escenarios de negocio definidos.
   Hallazgo #2: VALIDACIÓN DE USUARIO DUPLICADO
     La API valida correctamente si un usuario ya existe y devuelve:
     {"errorMessage": "This user already exist."}
-    Nota: Existe un error gramatical en el mensaje ("exist" debería ser
-    "exists").
 
   Hallazgo #3: NO VALIDACIÓN DE FORTALEZA DE PASSWORD
     La API acepta cualquier password sin validar longitud mínima,
@@ -76,81 +70,7 @@ logrando una cobertura completa de los escenarios de negocio definidos.
     y no sigue las mejores prácticas REST.
 
 ================================================================================
-3. ENTRADAS Y SALIDAS CAPTURADAS
-================================================================================
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ CASO 1: CREAR NUEVO USUARIO (Signup)                                       │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ ENTRADA:                                                                    │
-│   POST https://api.demoblaze.com/signup                                     │
-│   Headers: Content-Type: application/json                                     │
-│   Body: {"username": "testuser_1750413240000", "password": "TestPass123!"}  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ SALIDA:                                                                     │
-│   Status: 200 OK                                                            │
-│   Body: ""                                                                  │
-│   Response Time: ~200-800ms                                                 │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ CASO 2: USUARIO YA EXISTENTE (Signup)                                       │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ ENTRADA:                                                                    │
-│   POST https://api.demoblaze.com/signup                                     │
-│   Headers: Content-Type: application/json                                   │
-│   Body: {"username": "existinguser_1750413240000", "password": "Existing"}  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ SALIDA:                                                                     │
-│   Status: 200 OK                                                            │
-│   Body: {"errorMessage": "This user already exist."}                        │
-│   Response Time: ~200-800ms                                                 │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ CASO 3: LOGIN CORRECTO                                                     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ ENTRADA:                                                                    │
-│   POST https://api.demoblaze.com/login                                      │
-│   Headers: Content-Type: application/json                                   │
-│   Body: {"username": "existinguser_1750413240000", "password": "Existing"}  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ SALIDA:                                                                     │
-│   Status: 200 OK                                                            │
-│   Body: {"Auth_token": "dGVzdHVzZXIxNzUwNDEzMjQwMDAwMTc1MDQxMzI0"}          │
-│   Response Time: ~200-800ms                                                 │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ CASO 4: LOGIN CON PASSWORD INCORRECTO                                      │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ ENTRADA:                                                                    │
-│   POST https://api.demoblaze.com/login                                      │
-│   Headers: Content-Type: application/json                                   │
-│   Body: {"username": "existinguser_1750413240000", "password": "Wrong123"}  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ SALIDA:                                                                     │
-│   Status: 200 OK                                                            │
-│   Body: {"errorMessage": "Wrong password."}                                 │
-│   Response Time: ~200-800ms                                                 │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ CASO 4b: LOGIN CON USUARIO INEXISTENTE                                     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ ENTRADA:                                                                    │
-│   POST https://api.demoblaze.com/login                                      │
-│   Headers: Content-Type: application/json                                   │
-│   Body: {"username": "nonexistentuser_99999", "password": "SomePass123"}      │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ SALIDA:                                                                     │
-│   Status: 200 OK                                                            │
-│   Body: {"errorMessage": "User does not exist."}                            │
-│   Response Time: ~200-800ms                                                 │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-================================================================================
-4. CONCLUSIONES
+3. CONCLUSIONES
 ================================================================================
 
 4.1 SOBRE LA CALIDAD DE LA API
@@ -167,16 +87,14 @@ logrando una cobertura completa de los escenarios de negocio definidos.
   ✓ Los comandos personalizados facilitan la reutilización de código.
   ✓ Los logs detallados permiten identificar entradas y salidas claramente.
   ✓ La generación automática de videos y screenshots ayuda en el análisis.
-  ✓ La integración con Mocha/Chai proporciona assertions robustos.
 
 4.3 RECOMENDACIONES
 -------------------
   1. Implementar códigos de estado HTTP apropiados (201, 401, 409, 404).
   2. Devolver información del usuario creado en la respuesta de signup.
-  3. Corregir el error gramatical en "This user already exist."
-  4. Implementar validación de fortaleza de contraseñas.
-  5. Unificar el mensaje de error de login para evitar enumeración de usuarios.
-  6. Considerar agregar rate limiting para prevenir ataques de fuerza bruta.
+  3. Implementar validación de fortaleza de contraseñas.
+  4. Unificar el mensaje de error de login para evitar enumeración de usuarios.
+  5. Considerar agregar rate limiting para prevenir ataques de fuerza bruta.
 
 ================================================================================
 5. COBERTURA DE PRUEBAS
@@ -201,8 +119,6 @@ logrando una cobertura completa de los escenarios de negocio definidos.
 
   • Cypress.io v13.x        - Framework de automatización E2E y API
   • Node.js v16+            - Entorno de ejecución JavaScript
-  • Mocha                   - Framework de testing (incluido en Cypress)
-  • Chai                    - Librería de assertions (incluida en Cypress)
   • cy.request()            - Comando nativo de Cypress para peticiones HTTP
 
 ================================================================================
@@ -214,6 +130,3 @@ logrando una cobertura completa de los escenarios de negocio definidos.
   • API signup: https://api.demoblaze.com/signup
   • API login: https://api.demoblaze.com/login
 
-================================================================================
-                              FIN DEL DOCUMENTO
-================================================================================
