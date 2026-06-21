@@ -9,8 +9,7 @@
 
 Se realizaron pruebas automatizadas sobre los servicios REST de registro
 (signup) y autenticación (login) de demoblaze.com utilizando Cypress.io.
-Se cubrieron 4 casos de prueba principales más verificaciones adicionales,
-logrando una cobertura completa de los escenarios de negocio definidos.
+Se cubrieron los 4 casos de prueba principales verificando el API REST 
 
 ================================================================================
 2. HALLAZGOS TÉCNICOS
