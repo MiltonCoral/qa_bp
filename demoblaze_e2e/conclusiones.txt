@@ -80,4 +80,4 @@ NOTA: He incluido un video demo.mp4 con la prueba funcional
 ---
 *Fecha de ejecución: 2026-06-19*
 *Framework: Selenium WebDriver 4.x + Python 3*
-*Sitio bajo prueba: https://www.demoblaze.com*
+*Sitio bajo prueba: https://www.demoblaze.com
