@@ -16,16 +16,29 @@ module.exports = defineConfig({
     screenshotsFolder: 'cypress/screenshots',
     videosFolder: 'cypress/videos',
 
-    // Configuración de reportes
-    reporter: 'json',
+    // ============================================
+    // CONFIGURACIÓN DE REPORTES (Mochawesome)
+    // ============================================
+    reporter: 'cypress-mochawesome-reporter',
     reporterOptions: {
-      output: 'reports/cypress-report.json'
+      charts: true,                           // Gráficos de estadísticas
+      reportPageTitle: 'Demoblaze API Tests', // Título del reporte
+      embeddedScreenshots: true,              // Screenshots embebidos en el reporte
+      inlineAssets: true,                     // CSS/JS embebidos (reporte portable)
+      saveAllAttempts: false,                 // Solo guardar el último intento
+      overwrite: false,                       // No sobrescribir reportes anteriores
+      html: true,                             // Generar HTML
+      json: true,                             // Generar JSON
+      reportDir: 'cypress/reports',           // Carpeta de salida
+      reportFilename: 'demoblaze-api-report-[datetime]',
+      timestamp: 'longDate'
     },
 
-    // Grabar videos de las pruebas
+    // ============================================
+    // CONFIGURACIÓN DE VIDEO Y SCREENSHOTS
+    // ============================================
     video: true,
-
-    // Tomar screenshot cuando un test falla
+    videoCompression: 32,
     screenshotOnRunFailure: true,
 
     // Tamaño de ventana del navegador
@@ -38,7 +51,9 @@ module.exports = defineConfig({
     responseTimeout: 10000,
 
     setupNodeEvents(on, config) {
-      // Aquí puedes agregar event listeners de Node.js
+      // Plugin de mochawesome reporter
+      require('cypress-mochawesome-reporter/plugin')(on);
+      
       return config;
     },
   },

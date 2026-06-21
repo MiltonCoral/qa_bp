@@ -1,12 +1,7 @@
 # Dependencias
 node_modules/
 
-# Cypress artifacts
-cypress/screenshots/
-cypress/downloads/
 
-# Reportes
-reports/
 
 # Logs
 *.log
