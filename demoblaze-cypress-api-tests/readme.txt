@@ -84,8 +84,8 @@ demoblaze-cypress-api-tests/
 │
 ├── cypress/
 │   ├── e2e/
-│   │   ├── demoblaze-api.cy.js   ← Tests principales (4 casos)
-│   │   └── demoblaze-edge-cases.cy.js  ← Tests adicionales
+│   │   └── demoblaze-api.cy.js   ← Tests principales (4 casos)
+│   │  
 │   ├── fixtures/
 │   │   └── testData.json         ← Datos de prueba
 │   ├── support/
@@ -99,7 +99,7 @@ demoblaze-cypress-api-tests/
 └── conclusiones.txt             ← Hallazgos y conclusiones
 
 ================================================================================
-DETALLE DE LOS CASOS DE PRUEBA
+EJEMPLO DE LOS CASOS DE PRUEBA
 ================================================================================
 
 CASO 1: Crear un nuevo usuario (Signup)
@@ -181,12 +181,3 @@ Solución: Verificar conexión a internet. La API debe estar accesible.
 Problema: "Tests fallan intermitentemente"
 Solución: La API de demoblaze puede tener latencia. Aumentar el timeout en
 cypress.config.js si es necesario.
-
-================================================================================
-AUTOR
-================================================================================
-Proyecto creado para pruebas de automatización de API REST.
-Fecha: Junio 2026
-Herramienta: Cypress.io v13.x
-
-================================================================================
